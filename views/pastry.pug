@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1= title
-  - var results = [{pastry: "Pineapple",price: 21,toppings:"maple syrup"},{pastry: "Chocolate",price: 27,toppings:" fresh fruit"},{pastry: "Butter scotch",price: 30,toppings:"honey syrup"}];
-   div(class = "container-fluid")
+  
+  div(class = "container-fluid")
     div(class = "row")
      each form,index in results
         div(class="col-sm-4" onclick=`buy(${index})`) pastry: #{form.pastry} 
