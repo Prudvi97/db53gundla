@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let id = toShow._id 
+  - let pastry = toShow.pastry 
+  - let toppings = toShow.toppings 
+  - let price = toShow.price 
+  div 
+    div.row 
+      div(class='mr-3') Pastry ID is: 
+      div #{id} 
+    div.row 
+      div(class='mr-3') Pastry is: 
+      div #{pastry} 
+    div.row 
+      div(class='mr-3') Pastry Topping: 
+      div #{toppings} 
+    div.row 
+      div(class='mr-3') Pastry Price: 
+      div #{price}
