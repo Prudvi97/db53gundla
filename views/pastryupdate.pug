@@ -3,18 +3,26 @@ extends layout
 block content 
   h1= title 
 
+  - let id = toShow._id 
+  - let pastry = toShow.pastry 
+  - let toppings = toShow.toppings 
+  - let price = toShow.price 
+
+  div.row(class='mb-2') 
+     label(for='pastry' class="form-label") ID is #{id}
+  - let actionid = "/resource/pastrys/" + id 
 
   div(class="col-sm-4")
-    form(id='pastryForm', action="/resource/pastrys", method="POST") 
+    form(id='pastryForm', action=actionid) 
         div(class="mb-3")
             label(for='pastry' class="form-label") Pastry type 
-            input#pastry(type='text', name='pastry' class="form-control") 
+            input#pastry(type='text', name='pastry' class="form-control" value=pastry) 
         div(class="mb-3")
             label(for='toppings' class="form-label") Toppings 
-            input#toppings(type='text', name='toppings' class="form-control") 
+            input#toppings(type='text', name='toppings' class="form-control" value=toppings) 
         div(class="mb-3")
             label(for='price' class="form-label") Price 
-            input#price(type='number', name='price' class="form-control") 
+            input#price(type='text', name='price' class="form-control" value=price) 
         input(type="submit" class="btn btn-primary") 
     
     script. 
@@ -22,15 +30,15 @@ block content
         event.preventDefault(); 
         // TODO do something here to show user that form is being submitted 
         fetch(event.target.action, { 
-            method: 'POST', 
+            method: 'PUT', 
             body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
         }).then((resp) => { 
             return resp.json(); // or resp.text() or whatever the server sends 
         }).then((body) => { 
-            alert("Save succeded") 
+            alert("Update succeded") 
             // TODO handle body 
         }).catch((error) => { 
             // TODO handle error 
-            alert("Save failed " + error ) 
+            alert("Update failed " + error ) 
         }); 
         }); 
