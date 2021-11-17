@@ -4,15 +4,21 @@ block content
   h1= title
   
   div(class = "container-fluid")
+    a(href="/pastry/create" class="btn btn-secondary") Create 
     div(class = "row")
      each form,index in results
-        div(class="col-sm-4" onclick=`buy(${index})`) pastry: #{form.pastry} 
+        div(class="col-sm-2" onclick=`buy(${index})`) pastry: #{form.pastry} 
         br
         br 
-        div(class="col-sm-4" onclick=`buy(${index})`) price: #{form.price}
+        div(class="col-sm-2" onclick=`buy(${index})`) price: #{form.price}
         br
         br  
-        div(class="col-sm-4" onclick=`buy(${index})`) toppings: #{form.toppings}
+        div(class="col-sm-2" onclick=`buy(${index})`) toppings: #{form.toppings}
+        div(class="col-sm-3") Actions:  
+         a(href='pastry/update/?id='+form._id ) Update 
+         a(href='pastry/detail/?id='+form._id ) Detail 
+         a(href='pastry/delete/?id='+form._id ) Delete 
+
         script.
                 function buy(itemNo){
                     alert(`You purchased items ${itemNo+1}`)

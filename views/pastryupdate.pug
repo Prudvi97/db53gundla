@@ -24,6 +24,7 @@ block content
             label(for='price' class="form-label") Price 
             input#price(type='text', name='price' class="form-control" value=price) 
         input(type="submit" class="btn btn-primary") 
+        a(href="/pastry" class="btn btn-secondary") Cancel 
     
     script. 
         document.forms['pastryForm'].addEventListener('submit', (event) => { 

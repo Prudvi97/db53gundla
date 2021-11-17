@@ -2,22 +2,54 @@ extends layout
  
 block content 
   h1(class="")= title 
- 
-  - let id = toShow._id 
-  - let pastry = toShow.pastry 
-  - let toppings = toShow.toppings 
-  - let price = toShow.price 
 
-  div(class=" col-sm-4")
-    div(class="row mt-2 bg-secondary") 
-      div(class='mr-3 col-sm-3') Pastry ID is: 
-      div(class="col-sm-2") #{id} 
-    div(class="row mt-2 bg-secondary") 
-      div(class='mr-3 col-sm-3') Pastry is: 
-      div(class="col-sm-2") #{pastry} 
-    div(class="row mt-2 bg-secondary") 
-      div(class='mr-3 col-sm-3') Pastry Topping: 
-      div(class="col-sm-2") #{toppings} 
-    div(class="row mt-2 bg-secondary") 
-      div(class='mr-3 col-sm-3') Pastry Price: 
-      div(class="col-sm-2") #{price}
+   
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let id = toShow._id 
+    - let pastry = toShow.pastry 
+    - let toppings = toShow.toppings 
+    - let price = toShow.price 
+    - let actionid = "/resource/pastrys/" + id 
+    script let actionid = "#{actionid}" 
+    div(class="col-sm-4")
+        div(class="row mt-2") 
+        div(class='mr-3 col-sm-3') Pastry ID is: 
+        div(class="col-sm-2 form-control") #{id} 
+        div(class="row mt-2") 
+        div(class='mr-3 col-sm-3') Pastry is: 
+        div(class="col-sm-2 form-control") #{pastry} 
+        div(class="row mt-2") 
+        div(class='mr-3 col-sm-3') Pastry Topping: 
+        div(class="col-sm-2 form-control") #{toppings} 
+        div(class="row mt-2") 
+        div(class='mr-3 col-sm-3') Pastry Price: 
+        div(class="col-sm-2 form-control") #{price}
+        
+        
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+    
+    script. 
+        function cancel() { 
+        // Go back to the home page for the costume collection 
+        window.location.href='/pastry' 
+        } 
+    script. 
+        function deleteOnid() { 
+        console.log("starting delete") 
+        // delete first 
+        fetch(actionid, { 
+            method: 'DELETE'      
+        }).then((resp) => { 
+            return resp.json(); // or resp.text() or whatever the server sends 
+        }).then((body) => { 
+            alert("Delete succeded") 
+            window.location.href='/pastry' 
+            // TODO handle body 
+        }).catch((error) => { 
+            // TODO handle error 
+            alert("Delete failed " + error ) 
+        }); 
+        } 
