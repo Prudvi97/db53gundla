@@ -1,15 +1,29 @@
-extends layout
+//- extends layout
 
-block content
-  h1= title
-  p Welcome to Northwest Missouri
-  button(type='button', class="btn btn-success" onclick="update()") Press Me
-  div(id = "target") Display
-  a(href='/pastry') pastry page link
-  script.
-      out = document.getElementById("target");
-      var client_count = 0;
-      function update(){
-        client_count = client_count + 1;
-        out.innerHTML = "Value now " + client_count;
-      }
+//- block content
+//-   h1= title
+//-   p Welcome to Northwest Missouri
+//-   button(type='button', class="btn btn-success" onclick="update()") Press Me
+//-   div(id = "target") Display
+//-   a(href='/pastry') pastry page link
+//-   script.
+//-       out = document.getElementById("target");
+//-       var client_count = 0;
+//-       function update(){
+//-         client_count = client_count + 1;
+//-         out.innerHTML = "Value now " + client_count;
+//-       }
+
+
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/pastry") Take me to costumes 
+    br 
+    a(href="/logout") Logout 
